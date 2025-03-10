@@ -4,6 +4,8 @@ import { showLoginPage } from "./auth/login.js";
 import { logoutUser } from "./auth/logout.js";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+console.log("main.js chargé !");
+
 const auth = getAuth();
 
 // Vérifier l’état de l’utilisateur et afficher la bonne page
@@ -21,10 +23,20 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// Gérer la navigation
-document.getElementById("homeBtn").addEventListener("click", showHomePage);
-document.getElementById("loginBtn").addEventListener("click", showLoginPage);
+// Gérer la navigation et tester les clics
+document.getElementById("homeBtn").addEventListener("click", () => {
+    console.log("Bouton Accueil cliqué !");
+    showHomePage();
+});
+document.getElementById("loginBtn").addEventListener("click", () => {
+    console.log("Bouton Connexion cliqué !");
+    showLoginPage();
+});
 document.getElementById("dashboardBtn").addEventListener("click", () => {
+    console.log("Bouton Tableau de bord cliqué !");
     showDashboard(auth.currentUser);
 });
-document.getElementById("logoutBtn").addEventListener("click", logoutUser);
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    console.log("Bouton Déconnexion cliqué !");
+    logoutUser();
+});

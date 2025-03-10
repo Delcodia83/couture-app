@@ -4,3 +4,13 @@ body {
     padding: 20px;
     text-align: center;
 }
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
