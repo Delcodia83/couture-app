@@ -1,16 +1,15 @@
-import { showHomePage } from "../src/pages/home.js";
-import { showRegisterPage } from "../src/auth/register.js";
-import { showLoginPage } from "../src/auth/login.js";
-import { showDashboard } from "../src/pages/dashboard.js";
-import { showAdminPage } from "../src/pages/admin.js";
-import { logoutUser } from "../src/auth/logout.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { showHomePage } from "./pages/home.js";
+import { showRegisterPage } from "./auth/register.js";
+import { showLoginPage } from "./auth/login.js";
+import { showDashboard } from "./pages/dashboard.js";
+import { showAdminPage } from "./pages/admin.js";
+import { logoutUser } from "./auth/logout.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";  // Corrige Firebase
 
 console.log("Chargement de main.js...");
 
 const auth = getAuth();
 
-// Vérifier l'état de connexion de l'utilisateur
 onAuthStateChanged(auth, (user) => {
     if (user) {
         document.getElementById("dashboardBtn").style.display = "inline";
@@ -34,32 +33,9 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // Vérification des boutons
-document.getElementById("homeBtn").addEventListener("click", () => {
-    console.log("Accueil ouvert !");
-    showHomePage();
-});
-
-document.getElementById("registerBtn").addEventListener("click", () => {
-    console.log("Page inscription ouverte !");
-    showRegisterPage();
-});
-
-document.getElementById("loginBtn").addEventListener("click", () => {
-    console.log("Page connexion ouverte !");
-    showLoginPage();
-});
-
-document.getElementById("dashboardBtn").addEventListener("click", () => {
-    console.log("Tableau de bord ouvert !");
-    showDashboard(auth.currentUser);
-});
-
-document.getElementById("adminBtn").addEventListener("click", () => {
-    console.log("Page Admin ouverte !");
-    showAdminPage();
-});
-
-document.getElementById("logoutBtn").addEventListener("click", () => {
-    console.log("Déconnexion !");
-    logoutUser();
-});
+document.getElementById("homeBtn").addEventListener("click", showHomePage);
+document.getElementById("registerBtn").addEventListener("click", showRegisterPage);
+document.getElementById("loginBtn").addEventListener("click", showLoginPage);
+document.getElementById("dashboardBtn").addEventListener("click", () => showDashboard(auth.currentUser));
+document.getElementById("adminBtn").addEventListener("click", showAdminPage);
+document.getElementById("logoutBtn").addEventListener("click", logoutUser);
