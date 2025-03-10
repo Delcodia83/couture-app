@@ -1,71 +1,45 @@
-// Importation des modules nécessaires
 import { showHomePage } from "./pages/home.js";
 import { showRegisterPage } from "./auth/register.js";
 import { showLoginPage } from "./auth/login.js";
 import { showDashboard } from "./pages/dashboard.js";
-import { showAdminPage } from "./pages/admin.js";
 import { logoutUser } from "./auth/logout.js";
-
-// Importation Firebase
-import { auth } from "./utils/firebaseConfig.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { auth, db } from "./utils/firebaseConfig.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 console.log("Chargement de main.js...");
 
-// Vérifier l'état de connexion de l'utilisateur
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
-        document.getElementById("dashboardBtn").style.display = "inline";
-        document.getElementById("logoutBtn").style.display = "inline";
-        document.getElementById("loginBtn").style.display = "none";
-        document.getElementById("registerBtn").style.display = "none";
+        console.log("Utilisateur connecté :", user.email);
+        const userDoc = await getDoc(doc(db, "users", user.uid));
 
-        if (user.email === "admin@coutureapp.com") {
-            document.getElementById("adminBtn").style.display = "inline";
+        if (userDoc.exists()) {
+            const userData = userDoc.data();
+            console.log("Rôle de l'utilisateur :", userData.role);
+
+            if (userData.role === "client") {
+                window.location.href = "client-dashboard.html";
+            } else if (userData.role === "tailleur") {
+                window.location.href = "tailleur-dashboard.html";
+            } else {
+                alert("Rôle inconnu !");
+            }
+        } else {
+            console.log("Aucune donnée utilisateur trouvée !");
         }
-
-        showDashboard(user);
     } else {
-        document.getElementById("dashboardBtn").style.display = "none";
-        document.getElementById("logoutBtn").style.display = "none";
-        document.getElementById("adminBtn").style.display = "none";
-        document.getElementById("loginBtn").style.display = "inline";
-        document.getElementById("registerBtn").style.display = "inline";
         showHomePage();
     }
 });
 
-// Vérification des boutons
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Ajout des événements aux boutons...");
-
-    document.getElementById("homeBtn").addEventListener("click", () => {
-        console.log("Accueil ouvert !");
-        showHomePage();
-    });
-
-    document.getElementById("registerBtn").addEventListener("click", () => {
-        console.log("Page inscription ouverte !");
-        showRegisterPage();
-    });
-
-    document.getElementById("loginBtn").addEventListener("click", () => {
-        console.log("Page connexion ouverte !");
-        showLoginPage();
-    });
-
-    document.getElementById("dashboardBtn").addEventListener("click", () => {
-        console.log("Tableau de bord ouvert !");
-        showDashboard();
-    });
-
-    document.getElementById("adminBtn").addEventListener("click", () => {
-        console.log("Page Admin ouverte !");
-        showAdminPage();
-    });
-
-    document.getElementById("logoutBtn").addEventListener("click", () => {
+    document.getElementById("homeBtn").addEventListener("click", showHomePage);
+    document.getElementById("registerBtn").addEventListener("click", showRegisterPage);
+    document.getElementById("loginBtn").addEventListener("click", showLoginPage);
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
         console.log("Déconnexion !");
-        logoutUser();
+        await signOut(auth);
+        window.location.href = "index.html";
     });
 });
