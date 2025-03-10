@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Couture App</title>
+    <link rel="stylesheet" href="../src/styles/style.css">
 </head>
 <body>
-    <h1>Bienvenue sur Couture App</h1>
-    <p>Si vous voyez cette page, cela signifie que l'index fonctionne.</p>
+    <nav>
+        <button id="homeBtn">Accueil</button>
+        <button id="loginBtn">Connexion</button>
+        <button id="dashboardBtn" style="display:none;">Tableau de bord</button>
+        <button id="logoutBtn" style="display:none;">Déconnexion</button>
+    </nav>
+
+    <div id="app">
+        <h1>Bienvenue sur Couture App</h1>
+        <p>Application de gestion pour tailleurs et clients.</p>
+    </div>
+
+    <script src="../src/main.js" type="module"></script>
 </body>
 </html>
