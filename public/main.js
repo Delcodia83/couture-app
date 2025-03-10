@@ -1,9 +1,9 @@
-import { showHomePage } from "./pages/home.js";
-import { showRegisterPage } from "./auth/register.js";
-import { showLoginPage } from "./auth/login.js";
-import { showDashboard } from "./pages/dashboard.js";
-import { showAdminPage } from "./pages/admin.js";
-import { logoutUser } from "./auth/logout.js";
+import { showHomePage } from "../src/pages/home.js";
+import { showRegisterPage } from "../src/auth/register.js";
+import { showLoginPage } from "../src/auth/login.js";
+import { showDashboard } from "../src/pages/dashboard.js";
+import { showAdminPage } from "../src/pages/admin.js";
+import { logoutUser } from "../src/auth/logout.js";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 console.log("Chargement de main.js...");
