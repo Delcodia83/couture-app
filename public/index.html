@@ -7,17 +7,26 @@
     <link rel="stylesheet" href="src/styles/style.css">
 </head>
 <body>
+
+    <header>
+        <h1>Couture App</h1>
+        <p>Gérez vos mesures et vos modèles avec facilité</p>
+    </header>
+
     <nav>
-        <button id="homeBtn">Accueil</button>
-        <button id="loginBtn">Connexion</button>
-        <button id="dashboardBtn" style="display:none;">Tableau de bord</button>
-        <button id="logoutBtn" style="display:none;">Déconnexion</button>
+        <button id="homeBtn">🏠 Accueil</button>
+        <button id="registerBtn">📝 S'inscrire</button>
+        <button id="loginBtn">🔑 Connexion</button>
+        <button id="dashboardBtn" style="display:none;">📊 Tableau de bord</button>
+        <button id="adminBtn" style="display:none;">🛠️ Admin</button>
+        <button id="logoutBtn" style="display:none;">🚪 Déconnexion</button>
     </nav>
 
-    <div id="app">
-        <h1>Bienvenue sur Couture App</h1>
-        <p>Application de gestion pour tailleurs et clients.</p>
-    </div>
+    <section id="app">
+        <h2>Bienvenue sur Couture App</h2>
+        <p>Une plateforme intuitive pour gérer vos créations et vos clients.</p>
+        <img src="src/assets/fashion-design.jpg" alt="Illustration couture" class="illustration">
+    </section>
 
     <script src="src/main.js" type="module" defer></script>
 </body>
