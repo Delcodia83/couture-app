@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Administrateur</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Tableau de Bord Administrateur</h1>
+        <p>Génération et gestion des licences pour les tailleurs</p>
+
+        <div class="form-container">
+            <label for="tailorName">Nom du Tailleur :</label>
+            <input type="text" id="tailorName" placeholder="Nom complet">
+
+            <label for="tailorEmail">Email du Tailleur :</label>
+            <input type="email" id="tailorEmail" placeholder="email@exemple.com">
+
+            <label for="licenseDuration">Durée de la licence :</label>
+            <select id="licenseDuration">
+                <option value="6 mois">6 mois</option>
+                <option value="12 mois">12 mois</option>
+                <option value="illimité">À vie</option>
+            </select>
+
+            <button id="generateLicenseBtn">Générer Licence</button>
+        </div>
+
+        <h2>Licences Générées</h2>
+        <ul id="licensesList"></ul>
+
+        <div class="buttons">
+            <button id="backBtn">Retour</button>
+            <button id="logoutBtn">Déconnexion</button>
+        </div>
+    </div>
+
+    <script type="module" src="pages/admin.js"></script>
+</body>
+</html>
